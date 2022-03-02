@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import Wave from "@foobar404/wave";
+import song from './human.mp3';
+import "./App.css";
+console.log(song);
 
 function App() {
+  const [wave] = useState(new Wave());
+  useEffect(() => {
+    const options = { type: "orbs" };
+    wave.fromElement("player", "output", options);
+  }, [wave]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <canvas id="output" height="500" width="500"></canvas>
+      <audio id="player" controls src={song}>
+      </audio>
     </div>
   );
 }
